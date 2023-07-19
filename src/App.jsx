@@ -112,9 +112,11 @@ function App() {
           id="empleado"
           onChange={handleDniChange}
         ></input>
-        <button className="btn btn-primary" onClick={handleClick}>
-          Guardar
-        </button>
+        <div className="boton">
+          <button className="btn btn-primary" onClick={handleClick}>
+            Guardar
+          </button>
+        </div>
       </form>
       <div className="resultados">
         <Table>
