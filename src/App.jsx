@@ -9,6 +9,7 @@ import "./App.css";
 
 function App() {
   const [empleados, setEmpleados] = useState([]);
+  // --->>> useState del hipotético html de index.js de backend const [html, setHtml] = useState(""); -> abajo en el GetEmployee del useEffect ..
   //guardar los datos a través del llenado del formulario con un estado que va a ser un obj
   const [empleadoNuevo, setEmpleadoNuevo] = useState({
     nombre: "",
@@ -29,8 +30,10 @@ function App() {
     GetEmployee()
       .then((res) => {
         console.log(res);
+        //setHtml(res.html); --->>> abajo de todo, adentro de Container ... (pero que lo puse abajo de eso todavía p/no tener que escribirlo pq no se puede comentar ahí)
         //que cuando llegue la respuesta, hagamos el set de empleados y vamos a pedirles a los empleados que se guarden acá (en la respuesta)
-        setEmpleados(res);
+        //              el .data para que cuando me traiga el obj (que es el empleado) lo pueda iterar como un array  (? -> hasta ahora salía un error pq estoy guardando un obj y lo trato de iterar como si fuera un array
+        setEmpleados(res.data);
       })
       .catch((err) => console.log(err));
   }, [reload]); // -> c/vez que cambie reload vamos a actualizar este useEffect
@@ -132,7 +135,7 @@ function App() {
             {empleados.map((emp, index) => {
               return (
                 <tr key={index}>
-                  <td>{emp.id}</td>
+                  <td>{emp._id}</td>
                   <td>{emp.nombre}</td>
                   <td>{emp.apellido}</td>
                   <td>{emp.dni}</td>
@@ -143,6 +146,8 @@ function App() {
         </Table>
       </div>
     </Container>
+    //      empleados && emplados.map....
+    //                     _id p/q aparezcan los id en la tabla del sitio web
     //        en el return ponemos el código que tenía afuera como html antes
     //                 el map recibe el empleado y el index, necesitamos pasarle el key
     //      puedo usar todo ésto de empleado pq arriba en el useState lo declare como un array vacío
@@ -165,5 +170,8 @@ function App() {
     */
   );
 }
+
+//      si el html existe, mostralo
+//<div>{html ?? html}</div> 
 
 export default App;
